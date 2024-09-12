@@ -1,13 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <script type="module" src="./src/main.ts" defer></script>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <header>
+      <h1>TypeScript-Quiz</h1>
+    </header>
+    <main>
+      <section>
+        <form id="form-difficulty">
+          <select name="language" id="language">
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+          </select>
+          <select name="difficulty" id="difficulty">
+            <option value="easy">leicht / easy</option>
+            <option value="hard">schwierig / hard</option>
+          </select>
+          <button type="submit">Start</button>
+        </form>
+      </section>
+      <section>
+        <p id="scoreText"></p>
+        <button type="button" onclick="location.reload()">
+          Quiz wiederholen
+        </button>
+      </section>
+      <section>
+        <form id="form-question">
+          <div id="card-container"></div>
+          <button type="submit" id="submit">Absenden</button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
