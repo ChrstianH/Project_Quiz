@@ -3,14 +3,23 @@
 ### Ein interaktives Quiz, um dein TypeScript-Wissen zu testen. Dieses Projekt wurde als Teil unseres Modulabschlussprojekts entwickelt und demonstriert unsere Fähigkeiten in TypeScript, HTML, CSS und DOM-Manipulation.
 
 ## Features
-Dynamisches Laden von Fragen: Fragen werden aus externen JSON-Dateien geladen, was eine einfache Erweiterung und Aktualisierung ermöglicht.
-Sprach- und Schwierigkeitsgrad-Auswahl: Benutzer können zwischen Deutsch und Englisch wählen und den Schwierigkeitsgrad einstellen (leicht oder schwierig).
-Intuitive Benutzeroberfläche: Fragen werden in übersichtlichen Karten präsentiert, und der "Absenden"-Button wird erst aktiviert, wenn alle Fragen beantwortet wurden.
-Sofortiges Feedback: Nach dem Absenden wird das Ergebnis angezeigt und die Seite scrollt automatisch nach oben, um das Quiz erneut zu starten.
+
+*   Fragen werden dynamisch aus JSON-Dateien geladen.
+*   Unterstützt verschiedene Schwierigkeitsgrade (leicht/schwierig).
+*   Fragen können auf Deutsch oder Englisch angezeigt werden, inklusive dynamischer Anpassung der Button-Beschriftungen.
+*   Ansprechendes Design mit Karten für jede Frage.
+*   Der Submit-Button wird erst aktiviert, wenn alle Fragen beantwortet wurden.
+*   Nach dem Absenden:
+    *   Scrollt die Seite automatisch nach oben.
+    *   Das Ergebnis wird angezeigt.
+    *   Richtige Antworten werden grün, falsche rot hervorgehoben
+    *   Richtig beantwortete Fragen werden ausgeblendet
+    *   Der Nutzer kann das Quiz wiederholen
 
 ## Installation
 Klone das Repository: `git clone https://github.com/<dein-github-username>/typescript-quiz.gi`
 Navigiere in das Projektverzeichnis: `cd typescript-quiz`
+Außerdem um Vite / TypeScript nutzen zu können im Terminal ausführen: `npm i`
 Öffne `index.html` in deinem Browser.
 
 ## Verwendung
@@ -41,9 +50,4 @@ Der Code wurde so sauber und übersichtlich wie möglich gehalten, damit man ihn
 ## Zukünftige Erweiterungen / Verbesserungen:
 1. Die Struktur des Codes bietet eine gute Grundlage, um jede Karte individuell zu gestalten und animieren zu können!
 2. Weitere Fragen und Kategorien: Das Quiz könnte durch zusätzliche Fragen und Kategorien erweitert werden, um das Wissen in verschiedenen TypeScript-Bereichen abzudecken.
-
 3. Nutzerdatenspeicherung: Die Verwendung von LocalStorage könnte dazu dienen, den Punktestand oder die besten Ergebnisse zu speichern, um den Fortschritt der Benutzer zu verfolgen.
-4. Verbesserte Fehlerbehandlung:
-
-## Lizenz
-Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die LICENSE-Datei für weitere Informationen.
