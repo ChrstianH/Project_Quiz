@@ -31,22 +31,27 @@ const scoreTextEl = document.getElementById(
   "scoreText"
 ) as HTMLParagraphElement;
 
-formDiff.addEventListener("submit", async (event: Event) => {
-  event.preventDefault();
-
+function getURL(): string {
   const lang = selectLang.value;
   const diff = selectDiff.value;
 
-  let URL = "";
   if (lang === "de" && diff === "easy") {
-    URL = GER_EASY_URL;
+    return GER_EASY_URL;
   } else if (lang === "de" && diff === "hard") {
-    URL = GER_HARD_URL;
+    return GER_HARD_URL;
   } else if (lang === "en" && diff === "easy") {
-    URL = ENG_EASY_URL;
+    return ENG_EASY_URL;
   } else if (lang === "en" && diff === "hard") {
-    URL = ENG_HARD_URL;
+    return ENG_HARD_URL;
+  } else {
+    return "";
   }
+}
+
+formDiff.addEventListener("submit", async (event: Event) => {
+  event.preventDefault();
+
+  const URL = getURL();
 
   cardCnt.innerHTML = "";
   try {
@@ -86,19 +91,9 @@ formDiff.addEventListener("submit", async (event: Event) => {
 
 formQuest.addEventListener("submit", async (event: Event) => {
   event.preventDefault();
-  const lang = selectLang.value;
-  const diff = selectDiff.value;
 
-  let URL = "";
-  if (lang === "de" && diff === "easy") {
-    URL = GER_EASY_URL;
-  } else if (lang === "de" && diff === "hard") {
-    URL = GER_HARD_URL;
-  } else if (lang === "en" && diff === "easy") {
-    URL = ENG_EASY_URL;
-  } else if (lang === "en" && diff === "hard") {
-    URL = ENG_HARD_URL;
-  }
+  const URL = getURL();
+
   let score = 0;
   let answersGiven = 0;
   let data: IQuestion[] = [];
@@ -145,15 +140,15 @@ formQuest.addEventListener("submit", async (event: Event) => {
   } catch (error) {
     console.error(error);
   } finally {
+    const lang = selectLang.value;
     scrollToTop();
     if (answersGiven === data.length) {
       if (lang === "de") {
         scoreTextEl.textContent = `${score} von ${data.length} Fragen richtig beantwortet.`;
-        document.getElementsByTagName("section")[1].style.display = "block";
       } else if (lang === "en") {
         scoreTextEl.textContent = `You answered ${score} of ${data.length} questions correctly.`;
-        document.getElementsByTagName("section")[1].style.display = "block";
       }
+      document.getElementsByTagName("section")[1].style.display = "block";
       submitBtn.style.display = "none";
     } else {
       window.alert(
