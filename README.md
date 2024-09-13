@@ -1,5 +1,3 @@
-So kannst du das einfach in deine Readme in der Repo übernehmen:
-
 # TypeScript Quiz
 #### English below!
 ### Ein interaktives Quiz, um dein TypeScript-Wissen zu testen. Dieses Projekt wurde als Teil unseres Modulabschlussprojekts entwickelt und demonstriert unsere Fähigkeiten in TypeScript, HTML, CSS und DOM-Manipulation.
