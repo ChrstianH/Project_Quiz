@@ -14,10 +14,14 @@
       <section>
         <form id="form-difficulty">
           <select name="language" id="language">
+            <option value="" disabled selected>Spache / Language</option>
             <option value="de">Deutsch</option>
             <option value="en">English</option>
           </select>
           <select name="difficulty" id="difficulty">
+            <option value="" disabled selected>
+              Schwierigkeit / Difficulty
+            </option>
             <option value="easy">leicht / easy</option>
             <option value="hard">schwierig / hard</option>
           </select>
@@ -26,7 +30,7 @@
       </section>
       <section>
         <p id="scoreText"></p>
-        <button type="button" onclick="location.reload()">
+        <button type="button" id="restartBtn" onclick="location.reload()">
           Quiz wiederholen
         </button>
       </section>

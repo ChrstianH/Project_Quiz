@@ -15,8 +15,18 @@ const selectDiff = document.getElementById("difficulty") as HTMLFormElement;
 
 const formQuest = document.getElementById("form-question") as HTMLFormElement;
 const cardCnt = document.getElementById("card-container") as HTMLDivElement;
-// const submitBtn = document.getElementById("submit") as HTMLButtonElement;
+const submitBtn = document.getElementById("submit") as HTMLButtonElement;
+const restartBtn = document.getElementById("restartBtn") as HTMLButtonElement;
 
+selectLang.addEventListener("change", () => {
+  if (selectLang.value === "en") {
+    submitBtn.textContent = "Submit";
+    restartBtn.textContent = "Restart Quiz";
+  } else if (selectLang.value === "de") {
+    submitBtn.textContent = "Absenden";
+    restartBtn.textContent = "Quiz wiederholen";
+  }
+});
 const scoreTextEl = document.getElementById(
   "scoreText"
 ) as HTMLParagraphElement;
@@ -54,10 +64,10 @@ formDiff.addEventListener("submit", async (event: Event) => {
         const answerInput = document.createElement("input") as HTMLInputElement;
         answerInput.type = "radio";
         answerInput.name = `answer${questionCount}`;
-        answerInput.id = `answer${i}`;
+        answerInput.id = `answer${questionCount}_${i}`;
         answerInput.value = i.toString();
         const answerLabel = document.createElement("label") as HTMLLabelElement;
-        answerLabel.setAttribute("for", `answer${i}`);
+        answerLabel.setAttribute("for", `answer${questionCount}_${i}`);
         answerLabel.textContent = question.answers[i];
         const answerBox = document.createElement("div") as HTMLDivElement;
         answerBox.appendChild(answerInput);
@@ -102,23 +112,55 @@ formQuest.addEventListener("submit", async (event: Event) => {
       questionCount++;
       const answer = document.querySelector(
         'input[name="answer' + questionCount.toString() + '"]:checked'
-      ) as HTMLInputElement;
-      const answerGiven = answer.value;
-      if (answerGiven) {
-        answersGiven++;
-      }
-      if (Number(answerGiven) === correctAnswer) {
-        score++;
+      ) as HTMLInputElement | any;
+      if (!answer) {
+        const answerBoxEl = document.querySelector(
+          'input[name="answer' + questionCount.toString() + '"]'
+        ) as HTMLInputElement | any;
+        answerBoxEl.parentElement.parentElement.parentElement.style.border =
+          "2px solid red";
+      } else {
+        const answerGiven = answer.value;
+        answer.parentElement.parentElement.parentElement.style.border = "none";
+
+        if (answerGiven) {
+          answersGiven++;
+        }
+        if (Number(answerGiven) === correctAnswer) {
+          score++;
+          answer.parentElement.parentElement.parentElement.style.display =
+            "none";
+        } else {
+          const answerBoxElements = document.querySelectorAll(
+            'input[name="answer' + questionCount.toString() + '"]'
+          ) as HTMLInputElement[] | any;
+          answerBoxElements[correctAnswer].parentElement.style.backgroundColor =
+            "lightgreen";
+          answerBoxElements[
+            Number(answerGiven)
+          ].parentElement.style.backgroundColor = "darksalmon";
+        }
       }
     }
   } catch (error) {
     console.error(error);
-    window.alert("Bitte zuerst alle Fragen beantworten!");
   } finally {
     scrollToTop();
     if (answersGiven === data.length) {
-      scoreTextEl.textContent = `${score} von ${data.length} Fragen richtig beantwortet.`;
-      document.getElementsByTagName("section")[1].style.display = "block";
+      if (lang === "de") {
+        scoreTextEl.textContent = `${score} von ${data.length} Fragen richtig beantwortet.`;
+        document.getElementsByTagName("section")[1].style.display = "block";
+      } else if (lang === "en") {
+        scoreTextEl.textContent = `You answered ${score} of ${data.length} questions correctly.`;
+        document.getElementsByTagName("section")[1].style.display = "block";
+      }
+      submitBtn.style.display = "none";
+    } else {
+      window.alert(
+        lang === "de"
+          ? "Bitte zuerst alle Fragen beantworten!"
+          : "Please answer all questions first!"
+      );
     }
   }
 });
